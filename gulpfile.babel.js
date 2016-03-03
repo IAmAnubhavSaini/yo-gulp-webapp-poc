@@ -168,6 +168,17 @@ gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras'], () => {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 
+/* default task
+ *
+ * depends upon 'clean' task.
+ * starts a 'build' task.
+ * () => { } is ES2015 way of saying function() { }
+ * start comes via inheritance from orchestrator. gulp/index.js doesn't contain start directly. 
+ * in this particular case: 
+ * 	'build' will be the callback of Orchestrator.start function.
+ */
+
 gulp.task('default', ['clean'], () => {
   gulp.start('build');
 });
+
