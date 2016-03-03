@@ -164,6 +164,16 @@ gulp.task('wiredep', () => {
     .pipe(gulp.dest('app'));
 });
 
+/* defining 'build' task.
+ * depends upon lint, html, images, fonts, extras tasks
+ * gulp.src comes from vinyl-fs via direct reference.
+ * Going deeper;
+ * 	src depends upon glob-stream's functionality esp. create and createStream.
+ * 	In this case:
+ * 		src calls create from glob-stream
+ *		since there is only one parameter, createStream is called.
+ * Note - TODO: figure out where does pipe come from.
+ */
 gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras'], () => {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
